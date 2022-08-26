@@ -1,4 +1,4 @@
-﻿using ApiAuth.Models;
+﻿using ApiAuth.DTOs;
 using ApiAuth.Repositories;
 using ApiAuth.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +11,9 @@ namespace ApiAuth.Controllers
     {
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] User model) {
+        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] LoginDTO request) {
             //Recupera usuário
-            var user = UserRepository.Get(model.Username, model.Password);
+            var user = UserRepository.Get(request.Username, request.Password);
             if (user == null)
                 return BadRequest("Usuário não informado");
 
